@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Werwolf Webspiel</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Werwolf Webspiel</h1>
+
+    <!-- Startseite -->
+    <div id="startScreen" class="screen active">
+      <div class="buttons-container">
+        <button id="createRoomBtn" class="btn">Raum erstellen</button>
+        <button id="joinRoomBtn" class="btn">Raum beitreten</button>
+      </div>
+    </div>
+
+    <!-- Raum erstellen -->
+    <div id="createRoomScreen" class="screen">
+      <h2>Raum erstellen</h2>
+      <form id="createRoomForm">
+        <div class="form-group">
+          <label for="creatorName">Dein Name:</label>
+          <input type="text" id="creatorName" required>
+        </div>
+
+        <div class="form-group">
+          <label for="roomId">Raum-ID:</label>
+          <input type="text" id="roomId" required>
+        </div>
+
+        <div class="form-group">
+          <label for="werewolfCount">Anzahl Werwölfe:</label>
+          <select id="werewolfCount" required>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="playerCount">Anzahl Spieler:</label>
+          <select id="playerCount" required>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn">Raum erstellen</button>
+        <button type="button" class="btn back-btn">Zurück</button>
+      </form>
+    </div>
+
+    <!-- Raum beitreten -->
+    <div id="joinRoomScreen" class="screen">
+      <h2>Raum beitreten</h2>
+      <form id="joinRoomForm">
+        <div class="form-group">
+          <label for="playerName">Dein Name:</label>
+          <input type="text" id="playerName" required>
+        </div>
+
+        <div class="form-group">
+          <label for="joinRoomId">Raum-ID:</label>
+          <input type="text" id="joinRoomId" required>
+        </div>
+
+        <button type="submit" class="btn">Beitreten</button>
+        <button type="button" class="btn back-btn">Zurück</button>
+      </form>
+    </div>
+
+    <!-- Lobby-Screen -->
+    <div id="lobbyScreen" class="screen">
+      <h2>Lobby</h2>
+      <div>
+        <h3>Raum-ID: <span id="lobbyRoomId"></span></h3>
+        <p>Warte auf Spieler... <span id="playerCount">0</span>/<span id="maxPlayerCount">0</span></p>
+      </div>
+
+      <div id="playerList" class="player-list">
+        <!-- Spielerliste wird hier eingefügt -->
+      </div>
+
+      <div id="countdown" class="countdown"></div>
+    </div>
+
+    <!-- Rolle-Anzeige -->
+    <div id="roleScreen" class="screen">
+      <h2>Deine Rolle</h2>
+      <div class="role-container">
+        <div id="roleIcon" class="role-icon"></div>
+        <div id="roleName" class="role-name"></div>
+        <p id="roleDescription" class="role-description"></p>
+      </div>
+      <button id="continueBtn" class="btn">Weiter</button>
+    </div>
+
+    <!-- Nachtphase (für Werwölfe) -->
+    <div id="werewolfScreen" class="screen">
+      <h2>Nachtphase</h2>
+      <p>Ihr seid Werwölfe! Wählt gemeinsam ein Opfer.</p>
+
+      <div id="werewolfTargets" class="player-list">
+        <!-- Mögliche Opfer werden hier angezeigt -->
+      </div>
+
+      <div id="werewolfVotes" class="votes-info">
+        <!-- Informationen über die Abstimmung der Werwölfe -->
+      </div>
+    </div>
+
+    <!-- Nachtphase (für Dorfbewohner) -->
+    <div id="villagerNightScreen" class="screen">
+      <h2>Nachtphase</h2>
+      <p>Es ist Nacht im Dorf. Die Werwölfe sind auf der Jagd...</p>
+      <div class="night-animation"></div>
+    </div>
+
+    <!-- Tagphase -->
+    <div id="dayScreen" class="screen">
+      <h2>Tagphase</h2>
+      <p id="nightResult" class="result-text"></p>
+      <p>Wer ist der Werwolf? Stimmt ab!</p>
+
+      <div id="villagerTargets" class="player-list">
+        <!-- Mögliche Verdächtige werden hier angezeigt -->
+      </div>
+
+      <div id="voteResults" class="vote-results">
+        <!-- Aktuelle Abstimmungsergebnisse werden hier angezeigt -->
+      </div>
+    </div>
+
+    <!-- Spielende -->
+    <div id="gameOverScreen" class="screen">
+      <h2>Spiel beendet</h2>
+      <div id="winnerAnnouncement" class="winner-announcement"></div>
+      <div id="werewolfReveal" class="werewolf-reveal"></div>
+      <button id="newGameBtn" class="btn">Neues Spiel</button>
+    </div>
+
+    <!-- Fehler-Overlay -->
+    <div id="errorOverlay" class="overlay">
+      <div class="overlay-content">
+        <h3>Fehler</h3>
+        <p id="errorMessage"></p>
+        <button id="errorCloseBtn" class="btn">Schließen</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/client.js"></script>
+</body>
+</html>
+
