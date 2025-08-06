@@ -45,10 +45,20 @@ Das Spiel kann einfach auf Render.com deployt werden:
    - **Runtime**: Node
    - **Build Command**: `npm install`
    - **Start Command**: `npm start`
+   - **Root Directory**: Lasse dieses Feld leer (Standardwert)
 
 5. Klicke auf "Create Web Service"
 
 6. Nach dem Deployment kannst du dein Spiel unter der zugewiesenen URL erreichen
+
+### Fehlerbehebung beim Deployment
+
+Wenn beim Deployment auf Render.com Fehler auftreten:
+
+1. Überprüfe die Logs im Render-Dashboard
+2. Stelle sicher, dass die `package.json` im Hauptverzeichnis liegt
+3. Prüfe, ob die Angaben für `main` und `start` korrekt sind
+4. Falls nötig, passe den Start-Befehl im Render-Dashboard an
 
 ## Spielregeln
 

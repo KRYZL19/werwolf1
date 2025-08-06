@@ -2,9 +2,9 @@
   "name": "werwolf-webspiel",
   "version": "1.0.0",
   "description": "Ein mobilfreundliches Werwolf-Webspiel",
-  "main": "src/server.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node src/server.js",
+    "start": "node server.js",
     "dev": "nodemon src/server.js"
   },
   "engines": {
